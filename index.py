@@ -46,14 +46,15 @@ def copy_and_rename(file_path, sha1):
 
 def process_directory(dir_path):
     for root, _, files in os.walk(dir_path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            try:
-                sha1, size, mime_type = get_file_info(file_path)
-                save_to_db(file_path, sha1, size, mime_type)
-                copy_and_rename(file_path, sha1)
-            except Exception as e:
-                logging.error(f'Error processing file {file_path}: {e}')
+        if 'data' in root.split(os.sep):
+            for file in files:
+                file_path = os.path.join(root, file)
+                try:
+                    sha1, size, mime_type = get_file_info(file_path)
+                    save_to_db(file_path, sha1, size, mime_type)
+                    copy_and_rename(file_path, sha1)
+                except Exception as e:
+                    logging.error(f'Error processing file {file_path}: {e}')
 
 # Start processing from the root directory
 process_directory('/')
