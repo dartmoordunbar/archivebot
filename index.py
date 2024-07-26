@@ -93,7 +93,7 @@ def make_web(file_path, mime, sha1):
             print("converting Image")
             im = Image.open(file_path)
             im.thumbnail([1000, 1000], Image.Resampling.LANCZOS)
-            im.save(f'web/w-{sha1}', "webp")
+            im.save(f'{web_root}/w-{sha1}', "webp")
     except Exception as e:
         print(e)
 
