@@ -80,7 +80,7 @@ def make_web(file_path, mime, sha1):
             print("converting PDF")
             pages = convert_from_path(
                 file_path,
-                output_folder='web/',
+                output_folder=web_root',
                 output_file=f'w-{sha1}',
                 first_page=1,
                 last_page=1,
@@ -88,7 +88,7 @@ def make_web(file_path, mime, sha1):
                 single_file=True,
                 fmt="jpg"
             )
-            shutil.move(f'web/w-{sha1}.jpg', f'web/w-{sha1}')
+            shutil.move(f'{web_root}/w-{sha1}.jpg', f'{web_root}/w-{sha1}')
         if mime.startswith('image/'):
             print("converting Image")
             im = Image.open(file_path)
@@ -100,8 +100,7 @@ def make_web(file_path, mime, sha1):
 
 def copy_and_rename(file_path, sha1):
     try:
-        destination_dir = './master'
-        destination_path = os.path.join(destination_dir, sha1)
+        destination_path = os.path.join(master_root, sha1)
         shutil.copyfile(file_path, destination_path)
     except Exception as e:
         logging.error(f'Error copying and renaming file {
