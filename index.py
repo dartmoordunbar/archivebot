@@ -13,8 +13,8 @@ import pandas as pd
 
 s3 = boto3.client(
     's3',
-    aws_access_key_id= os.getenv["AWS_ACCESS"],
-    aws_secret_access_key=os.getenv["AWS_SECRET"]
+    aws_access_key_id= os.environ.get["AWS_ACCESS"],
+    aws_secret_access_key=os.environ.get["AWS_SECRET"]
 )
 input_root = "/data/collections"
 master_root="/data/master"
