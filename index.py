@@ -11,6 +11,11 @@ import magic
 from pdf2image import convert_from_path
 import pandas as pd
 
+
+input_root = "/data/collections"
+master_root="/data/master"
+web_root="/data/web"
+  
 # Set up logging
 logging.basicConfig(filename='file_processing.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
@@ -124,10 +129,7 @@ def check_s3(bucket, key):
 
 def main():
 
-    input_root = "/data/collections"
-    master_root="/data/master"
-    web_root="/data/web"
-  
+   
     # df = pd.DataFrame(index = ["sha1", "path", "size"])
 
     for root, _, files in os.walk(input_root):
