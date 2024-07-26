@@ -11,7 +11,11 @@ import magic
 from pdf2image import convert_from_path
 import pandas as pd
 
-
+s3 = boto3.client(
+    's3',
+    aws_access_key_id=process.env.aws_access_key_id,
+    aws_secret_access_key=process.env.aws_secret_access_key
+)
 input_root = "/data/collections"
 master_root="/data/master"
 web_root="/data/web"
