@@ -80,7 +80,7 @@ def make_web(file_path, mime, sha1):
             print("converting PDF")
             pages = convert_from_path(
                 file_path,
-                output_folder=web_root',
+                output_folder=web_root,
                 output_file=f'w-{sha1}',
                 first_page=1,
                 last_page=1,
