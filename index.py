@@ -125,19 +125,21 @@ def check_s3(bucket, key):
 
 def main():
 
-    input_path = "input/"
-
+    input_root = "/data/collections"
+    master_root="/data/master"
+    web_root="/data/web"
+  
     # df = pd.DataFrame(index = ["sha1", "path", "size"])
 
-    for root, _, files in os.walk(input_path):
+    for root, _, files in os.walk(input_root):
         # if 'data' in root.split(os.sep):
         for file in files:
             try:
                 file_path = os.path.join(root, file)
                 sha1, size, mime_type = get_file_info(file_path)
                 web_name = f"w-{sha1}"
-                web_path = f"web/{web_name}"
-                master_path = f"master/{sha1}"
+                web_path = f"{web_root}/{web_name}"
+                master_path = f"{master_root}/{sha1}"
                 save_to_db(file_path, sha1, size, mime_type)
                 make_web(file_path, mime_type, sha1)
                 s3_upload(web_path, 'dartmoorweb', web_name)
